@@ -1,0 +1,18 @@
+﻿<Window x:Class="JobMonitor.AddNewJob"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JobMonitor"
+        mc:Ignorable="d"
+        Title="Add New Job" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="410" MinHeight="434">
+    <Grid>
+        <Label Content="Job Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="JobName" Text="Job name here..." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" GotFocus="JobName_GotFocus" MinWidth="145" Width="145" Padding="5,5,5,5"/>
+        <Label Content="Job Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,64,0,0"/>
+        <DatePicker x:Name="JobDate" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0" Padding="5,5,5,5"/>
+        <Label Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,132,0,0"/>
+        <TextBox x:Name="JobDescription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,163,0,0" GotFocus="JobName_GotFocus" MinWidth="145" Width="380" Padding="5,5,5,5" Height="181"/>
+        <Button Content="Add This Job" Padding="5,5,5,5" VerticalAlignment="Top" Click="AddJob_Click" HorizontalAlignment="Center" Width="380" Margin="0,356,0,0"/>
+    </Grid>
+</Window>

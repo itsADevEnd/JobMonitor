@@ -1,0 +1,43 @@
+﻿<Window x:Class="JobMonitor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:JobMonitor"
+        mc:Ignorable="d"
+        Title="Job Monitor" Height="450" Width="800" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize" x:Name="JobMonitorClass" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Job List" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontStyle="Normal" Height="53" Margin="0,10,0,0" VerticalContentAlignment="Center" Width="380" HorizontalContentAlignment="Center" Grid.Column="0"/>
+        <ListView Grid.Column="0" Margin="10,68,10,65" ItemsSource="{Binding Jobs}" DataContext="{Binding ElementName=JobMonitorClass}" HorizontalContentAlignment="Center">
+            <ListView.View>
+                <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Job Information">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=JobName}" Header="Job Name" Width="126.66"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=JobDescription}" Header="Job Description" Width="126.66"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding JobDate}" Width="126.66">
+                        <GridViewColumnHeader>Job Date
+                            <GridViewColumnHeader.ContextMenu>
+                                <ContextMenu MenuItem.Click="JobDateSort_Click" Name="JobDateSort">
+                                    <MenuItem Header="Ascending"/>
+                                    <MenuItem Header="Descending"/>
+                                </ContextMenu>
+                            </GridViewColumnHeader.ContextMenu>
+                        </GridViewColumnHeader>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Grid.Column="0" Content="Add New Job" FontWeight="Bold" Margin="10,389,10,10" Click="AddNewJob_Click" Height="30"/>
+        <Label Content="Job Details" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontStyle="Normal" Height="53" Margin="0,10,0,0" VerticalContentAlignment="Center" Width="380" HorizontalContentAlignment="Center" Grid.Column="1"/>
+        <Label Grid.Column="1" Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,68,0,0"/>
+        <Label Grid.Column="1" Content="Date:" Margin="10,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Grid.Column="1" Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,157,0,0"/>
+        <TextBox Grid.Column="1" Margin="10,188,10,65" TextWrapping="Wrap"/>
+        <Button Content="Edit Job" FontWeight="Bold" Margin="10,389,10,10" Grid.Column="1" Height="30"/>
+        <TextBox Grid.Column="1" Text="Job Name TextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,72,0,0" BorderBrush="{x:Null}"/>
+        <DatePicker Grid.Column="1" Margin="52,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
