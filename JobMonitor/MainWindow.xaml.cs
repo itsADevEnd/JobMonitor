@@ -21,11 +21,21 @@ namespace JobMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static ObservableCollection<Job> Jobs { get; set; } = new ObservableCollection<Job>();
+        private static int temporaryJobId = -1;
+        public static ObservableCollection<Job> Jobs { get; set; } = new ObservableCollection<Job>()
+        {
+            new Job("Make wooden frame", "12/02/2022", "Make a wooden frame for our client."),
+            new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting.")
+        };
 
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Jobs_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            MessageBox.Show("Changed...");
         }
 
         private void AddNewJob_Click(object sender, RoutedEventArgs e)
@@ -37,6 +47,44 @@ namespace JobMonitor
         private void JobDateSort_Click(object sender, RoutedEventArgs e)
         {
             Jobs.OrderBy(jobs => jobs.JobDate);
+        }
+
+        private void JobListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Job? selectedJob = (sender as ListView).SelectedItem as Job;
+            temporaryJobId = selectedJob.JobId;
+            JobNameTextBox.Text = selectedJob.JobName;
+            JobDateDatePicker.Text = selectedJob.JobDate;
+            JobDescriptionTextBox.Text = selectedJob.JobDescription;
+        }
+
+        private void EditJob_Click(object sender, RoutedEventArgs e)
+        {
+            Button? editButton = sender as Button;
+
+            switch (editButton.Content.ToString())
+            {
+                case "Edit Job":
+                    JobNameTextBox.IsEnabled = true;
+                    JobDateDatePicker.IsEnabled = true;
+                    JobDescriptionTextBox.IsEnabled = true;
+                    editButton.Content = "Save Changes";
+                    break;
+                default:
+                    UpdateJob();
+                    JobNameTextBox.IsEnabled = false;
+                    JobDateDatePicker.IsEnabled = false;
+                    JobDescriptionTextBox.IsEnabled = false;
+                    editButton.Content = "Edit Job";
+                    break;
+            }
+        }
+
+        private void UpdateJob()
+        {
+            Jobs[temporaryJobId].JobName = JobNameTextBox.Text;
+            Jobs[temporaryJobId].JobDescription = JobDescriptionTextBox.Text;
+            Jobs[temporaryJobId].JobDate = JobDateDatePicker.Text;
         }
     }
 }

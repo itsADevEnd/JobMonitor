@@ -12,7 +12,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="Job List" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontStyle="Normal" Height="53" Margin="0,10,0,0" VerticalContentAlignment="Center" Width="380" HorizontalContentAlignment="Center" Grid.Column="0"/>
-        <ListView Grid.Column="0" Margin="10,68,10,65" ItemsSource="{Binding Jobs}" DataContext="{Binding ElementName=JobMonitorClass}" HorizontalContentAlignment="Center">
+        <ListView Grid.Column="0" Margin="10,68,10,65" ItemsSource="{Binding Jobs}" DataContext="{Binding ElementName=JobMonitorClass}" HorizontalContentAlignment="Center" SelectionChanged="JobListView_SelectionChanged">
             <ListView.View>
                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Job Information">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=JobName}" Header="Job Name" Width="126.66"/>
@@ -35,9 +35,9 @@
         <Label Grid.Column="1" Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,68,0,0"/>
         <Label Grid.Column="1" Content="Date:" Margin="10,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Grid.Column="1" Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,157,0,0"/>
-        <TextBox Grid.Column="1" Margin="10,188,10,65" TextWrapping="Wrap"/>
-        <Button Content="Edit Job" FontWeight="Bold" Margin="10,389,10,10" Grid.Column="1" Height="30"/>
-        <TextBox Grid.Column="1" Text="Job Name TextBox" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,72,0,0" BorderBrush="{x:Null}"/>
-        <DatePicker Grid.Column="1" Margin="52,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="JobDescriptionTextBox" Grid.Column="1" Margin="10,188,10,65" TextWrapping="Wrap" IsEnabled="False"/>
+        <Button Content="Edit Job" FontWeight="Bold" Margin="10,389,10,10" Grid.Column="1" Height="30" Click="EditJob_Click"/>
+        <TextBox x:Name="JobNameTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,72,0,0" BorderBrush="{x:Null}" IsEnabled="False"/>
+        <DatePicker x:Name="JobDateDatePicker" Grid.Column="1" Margin="52,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
     </Grid>
 </Window>
