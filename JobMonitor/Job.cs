@@ -1,18 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace JobMonitor
 {
-    public class Job
+    public class Job : INotifyPropertyChanged
     {
         private static int id = 0;
+        private string jobName = "";
+        private string jobDate = "";
+        private string jobDescription = "";
+
         public int JobId { get; set; }
-        public string JobName { get; set; }
-        public string JobDate { get; set; }
-        public string JobDescription { get; set; }
+        public string JobName
+        {
+            get
+            {
+                return jobDescription;
+            }
+            set
+            {
+                if (value != jobDescription)
+                {
+                    jobDescription = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string JobDate
+        {
+            get
+            {
+                return jobDate;
+            }
+            set
+            {
+                if (value != jobDate)
+                {
+                    jobDate = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public string JobDescription
+        {
+            get
+            {
+                return jobDescription;
+            }
+            set
+            {
+                if (value != jobDescription)
+                {
+                    jobDescription = value;
+                    NotifyPropertyChanged();
+                }
+            }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public Job(string jobName, string jobDate, string jobDescription)
         {

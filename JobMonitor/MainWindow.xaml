@@ -12,7 +12,7 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Label Content="Job List" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontStyle="Normal" Height="53" Margin="0,10,0,0" VerticalContentAlignment="Center" Width="380" HorizontalContentAlignment="Center" Grid.Column="0"/>
-        <ListView Grid.Column="0" Margin="10,68,10,65" ItemsSource="{Binding Jobs}" DataContext="{Binding ElementName=JobMonitorClass}" HorizontalContentAlignment="Center" SelectionChanged="JobListView_SelectionChanged">
+        <ListView x:Name="JobListView" Grid.Column="0" Margin="10,68,10,65" ItemsSource="{Binding Jobs}" DataContext="{Binding ElementName=JobMonitorClass}" HorizontalContentAlignment="Center" SelectionChanged="JobListView_SelectionChanged">
             <ListView.View>
                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Job Information">
                     <GridViewColumn DisplayMemberBinding="{Binding Path=JobName}" Header="Job Name" Width="126.66"/>

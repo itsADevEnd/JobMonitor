@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,7 +24,8 @@ namespace JobMonitor
     public partial class MainWindow : Window
     {
         private static int temporaryJobId = -1;
-        public static ObservableCollection<Job> Jobs { get; set; } = new ObservableCollection<Job>()
+
+        public static BindingList<Job> Jobs { get; set; } = new BindingList<Job>()
         {
             new Job("Make wooden frame", "12/02/2022", "Make a wooden frame for our client."),
             new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting.")
@@ -31,11 +34,6 @@ namespace JobMonitor
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Jobs_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            MessageBox.Show("Changed...");
         }
 
         private void AddNewJob_Click(object sender, RoutedEventArgs e)
@@ -52,10 +50,14 @@ namespace JobMonitor
         private void JobListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Job? selectedJob = (sender as ListView).SelectedItem as Job;
-            temporaryJobId = selectedJob.JobId;
-            JobNameTextBox.Text = selectedJob.JobName;
-            JobDateDatePicker.Text = selectedJob.JobDate;
-            JobDescriptionTextBox.Text = selectedJob.JobDescription;
+
+            if (selectedJob != null)
+            {
+                temporaryJobId = selectedJob.JobId;
+                JobNameTextBox.Text = selectedJob.JobName;
+                JobDateDatePicker.Text = selectedJob.JobDate;
+                JobDescriptionTextBox.Text = selectedJob.JobDescription;
+            }
         }
 
         private void EditJob_Click(object sender, RoutedEventArgs e)
