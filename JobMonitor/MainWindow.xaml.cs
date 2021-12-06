@@ -49,9 +49,7 @@ namespace JobMonitor
 
         private void JobListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Job? selectedJob = (sender as ListView).SelectedItem as Job;
-
-            if (selectedJob != null)
+            if ((sender as ListView).SelectedItem is Job selectedJob)
             {
                 Edit.IsEnabled = true;
                 temporaryJobId = selectedJob.JobId;

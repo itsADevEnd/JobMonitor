@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:JobMonitor"
         mc:Ignorable="d"
-        Title="Add New Job" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="410" MinHeight="434">
-    <Grid>
+        Title="Add New Job" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid MinWidth="400" MinHeight="420">
         <Label Content="Job Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox x:Name="JobName" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" MinWidth="145" Width="145" Padding="5,5,5,5"/>
         <Label Content="Job Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,94,0,0"/>
