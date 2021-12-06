@@ -8,11 +8,15 @@
         Title="Add New Job" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" MinWidth="410" MinHeight="434">
     <Grid>
         <Label Content="Job Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox x:Name="JobName" Text="Job name here..." HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" GotFocus="JobName_GotFocus" MinWidth="145" Width="145" Padding="5,5,5,5"/>
-        <Label Content="Job Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,64,0,0"/>
-        <DatePicker x:Name="JobDate" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,95,0,0" Padding="5,5,5,5"/>
-        <Label Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,132,0,0"/>
-        <TextBox x:Name="JobDescription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,163,0,0" GotFocus="JobName_GotFocus" MinWidth="145" Width="380" Padding="5,5,5,5" Height="181"/>
-        <Button Content="Add This Job" Padding="5,5,5,5" VerticalAlignment="Top" Click="AddJob_Click" HorizontalAlignment="Center" Width="380" Margin="0,356,0,0"/>
+        <TextBox x:Name="JobName" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" GotFocus="JobName_GotFocus" MinWidth="145" Width="145" Padding="5,5,5,5"/>
+        <Label Content="Job Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,94,0,0"/>
+        <DatePicker x:Name="JobDate" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,125,0,0" Padding="5,5,5,5"/>
+        <Label Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,170,0,0"/>
+        <TextBox x:Name="JobDescription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,201,0,0" GotFocus="JobName_GotFocus" MinWidth="145" Width="380" Padding="5,5,5,5" Height="143" TextWrapping="Wrap"/>
+        <Label Content="Characters:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,64,0,0" Height="28"/>
+        <Label Content="{Binding Text.Length, ElementName=JobName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,64,0,0" Height="28"/>
+        <Button Content="Add This Job" Padding="5,5,5,5" VerticalAlignment="Top" Click="AddJob_Click" HorizontalAlignment="Center" Width="380" Margin="0,380,0,0"/>
+        <Label Content="Characters:" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="160,0,0,43"/>
+        <Label Content="{Binding Text.Length, ElementName=JobDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="228,0,0,43"/>
     </Grid>
 </Window>

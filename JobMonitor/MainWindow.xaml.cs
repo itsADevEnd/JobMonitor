@@ -28,7 +28,22 @@ namespace JobMonitor
         public static BindingList<Job> Jobs { get; set; } = new BindingList<Job>()
         {
             new Job("Make wooden frame", "12/02/2022", "Make a wooden frame for our client."),
-            new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting.")
+            new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting."),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
+            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long")
         };
 
         public MainWindow()
@@ -53,11 +68,13 @@ namespace JobMonitor
 
             if (selectedJob != null)
             {
+                Edit.IsEnabled = true;
                 temporaryJobId = selectedJob.JobId;
                 JobNameTextBox.Text = selectedJob.JobName;
                 JobDateDatePicker.Text = selectedJob.JobDate;
                 JobDescriptionTextBox.Text = selectedJob.JobDescription;
             }
+            else if (Edit.IsEnabled == true) Edit.IsEnabled = false;
         }
 
         private void EditJob_Click(object sender, RoutedEventArgs e)
@@ -87,6 +104,11 @@ namespace JobMonitor
             Jobs[temporaryJobId].JobName = JobNameTextBox.Text;
             Jobs[temporaryJobId].JobDescription = JobDescriptionTextBox.Text;
             Jobs[temporaryJobId].JobDate = JobDateDatePicker.Text;
+        }
+
+        private void CancelChangesButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

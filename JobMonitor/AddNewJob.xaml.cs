@@ -36,21 +36,21 @@ namespace JobMonitor
 
         private void AddJob_Click(object sender, RoutedEventArgs e)
         {
-            if (JobName.Text != "Job name here..." && JobName.Text.Length > 0)
+            if (JobName.Text.Length > 0 && JobName.Text.Length <= 40)
             {
-                if (JobDescription.Text.Length > 0)
+                if (JobDescription.Text.Length > 0 && JobDescription.Text.Length <= 500)
                 {
                     MainWindow.Jobs.Add(new Job(JobName.Text, JobDate.Text, JobDescription.Text));
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("You must have a job name for this job.");
+                    MessageBox.Show("The job description is either empty or is greater than 500 characters.", "Warning");
                 }
             }
             else
             {
-                MessageBox.Show("You must have a job name for this job.");
+                MessageBox.Show("You must either give the job a name or it is greater than 40 characters.", "Warning");
             }
         }
     }
