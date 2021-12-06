@@ -30,15 +30,51 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Grid.Column="0" Content="Add New Job" FontWeight="Bold" Margin="10,389,10,10" Click="AddNewJob_Click" Height="30"/>
+        <Button Grid.Column="0" Content="Add New Job" FontWeight="Bold" Margin="10,389,10,10" Click="AddNewJob_Click" Height="30">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
         <Label Content="Job Details" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" FontWeight="Bold" FontStyle="Normal" Height="53" Margin="0,10,0,0" VerticalContentAlignment="Center" Width="380" HorizontalContentAlignment="Center" Grid.Column="1"/>
         <Label Grid.Column="1" Content="Job Name:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,68,0,0"/>
         <Label Grid.Column="1" Content="Date:" Margin="10,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Label Grid.Column="1" Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,136,0,0"/>
-        <TextBox x:Name="JobDescriptionTextBox" Grid.Column="1" Margin="10,167,10,86" TextWrapping="Wrap" IsEnabled="False"/>
-        <Button x:Name="CancelChanges" Content="Cancel Changes" FontWeight="Bold" Margin="10,357,10,48" Grid.Column="1" Height="30" Click="CancelChangesButton_Click" IsEnabled="False"/>
-        <Button x:Name="Edit" Content="Edit Job" FontWeight="Bold" Margin="10,389,10,10" Grid.Column="1" Height="30" Click="EditJob_Click" IsEnabled="False"/>
-        <TextBox x:Name="JobNameTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,72,0,0" BorderBrush="{x:Null}" IsEnabled="False"/>
-        <DatePicker x:Name="JobDateDatePicker" Grid.Column="1" Margin="52,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
+        <TextBox x:Name="JobDescriptionTextBox" Grid.Column="1" Margin="10,167,10,86" TextWrapping="Wrap" IsEnabled="False">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button x:Name="CancelChanges" Content="Cancel Changes" FontWeight="Bold" Margin="10,357,10,48" Grid.Column="1" Height="30" Click="CancelChangesButton_Click" IsEnabled="False">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="Edit" Content="Edit Job" FontWeight="Bold" Margin="10,389,10,10" Grid.Column="1" Height="30" Click="EditJob_Click" IsEnabled="False">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBox x:Name="JobNameTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="81,72,0,0" BorderBrush="{x:Null}" IsEnabled="False">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <DatePicker x:Name="JobDateDatePicker" Grid.Column="1" Margin="52,99,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False">
+            <DatePicker.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
     </Grid>
 </Window>
