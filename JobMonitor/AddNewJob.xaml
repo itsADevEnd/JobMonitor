@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:JobMonitor"
         mc:Ignorable="d"
         Title="Add New Job" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
-    <Grid MinWidth="400" MinHeight="420">
+    <Grid MinWidth="400" MinHeight="440">
         <Label Content="Job Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox x:Name="JobName" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" MinWidth="145" Width="145" Padding="5,5,5,5"/>
         <Label Content="Job Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,94,0,0"/>
@@ -17,9 +17,9 @@
         <Label Content="{Binding Text.Length, ElementName=JobName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,64,0,0" Height="28"/>
         <Border>
             <Border.Effect>
-                <DropShadowEffect Direction="300" BlurRadius="7" ShadowDepth="3"/>
+                <DropShadowEffect Direction="300" BlurRadius="7" ShadowDepth="1"/>
             </Border.Effect>
-            <Button Content="Add This Job" Padding="5,5,5,5" VerticalAlignment="Top" Click="AddJob_Click" HorizontalAlignment="Center" Width="380" Margin="0,380,0,0" BorderThickness="0,0,0,0" Background="White">
+            <Button Content="Add This Job" Padding="7" VerticalAlignment="Top" Click="AddJob_Click" HorizontalAlignment="Center" Width="380" Margin="0,395,0,0" BorderThickness="0,0,0,0" Background="White" FontSize="16">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
@@ -27,7 +27,7 @@
                 </Button.Resources>
             </Button>
         </Border>
-        <Label Content="Characters:" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="160,0,0,43"/>
-        <Label Content="{Binding Text.Length, ElementName=JobDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="228,0,0,43"/>
+        <Label Content="Characters:" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="157,0,0,65"/>
+        <Label Content="{Binding Text.Length, ElementName=JobDescription, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="225,0,0,65"/>
     </Grid>
 </Window>
