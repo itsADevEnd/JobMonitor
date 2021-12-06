@@ -20,13 +20,13 @@ namespace JobMonitor
         {
             get
             {
-                return jobDescription;
+                return jobName;
             }
             set
             {
-                if (value != jobDescription)
+                if (value != jobName)
                 {
-                    jobDescription = value;
+                    jobName = value;
                     NotifyPropertyChanged();
                 }
             }

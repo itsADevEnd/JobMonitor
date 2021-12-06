@@ -24,16 +24,6 @@ namespace JobMonitor
             InitializeComponent();
         }
 
-        private void JobName_GotFocus(object sender, RoutedEventArgs e)
-        {
-            TextBox? jobNameTextBox = sender as TextBox;
-
-            if (jobNameTextBox.Text == "Job name here...")
-            {
-                jobNameTextBox.Text = "";
-            }
-        }
-
         private void AddJob_Click(object sender, RoutedEventArgs e)
         {
             if (JobName.Text.Length > 0 && JobName.Text.Length <= 40)

@@ -28,22 +28,7 @@ namespace JobMonitor
         public static BindingList<Job> Jobs { get; set; } = new BindingList<Job>()
         {
             new Job("Make wooden frame", "12/02/2022", "Make a wooden frame for our client."),
-            new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting."),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long"),
-            new Job("This is 40 characters long which is being tested n", "14/12/2027", "40 characters long")
+            new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting.")
         };
 
         public MainWindow()
@@ -88,6 +73,7 @@ namespace JobMonitor
                     JobDateDatePicker.IsEnabled = true;
                     JobDescriptionTextBox.IsEnabled = true;
                     editButton.Content = "Save Changes";
+                    CancelChanges.IsEnabled = true;
                     break;
                 default:
                     UpdateJob();
@@ -95,6 +81,7 @@ namespace JobMonitor
                     JobDateDatePicker.IsEnabled = false;
                     JobDescriptionTextBox.IsEnabled = false;
                     editButton.Content = "Edit Job";
+                    CancelChanges.IsEnabled = false;
                     break;
             }
         }
@@ -108,7 +95,14 @@ namespace JobMonitor
 
         private void CancelChangesButton_Click(object sender, RoutedEventArgs e)
         {
-
+            JobNameTextBox.Text = Jobs[temporaryJobId].JobName;
+            JobDateDatePicker.Text = Jobs[temporaryJobId].JobDate;
+            JobDescriptionTextBox.Text = Jobs[temporaryJobId].JobDescription;
+            CancelChanges.IsEnabled = false;
+            JobNameTextBox.IsEnabled = false;
+            JobDateDatePicker.IsEnabled = false;
+            JobDescriptionTextBox.IsEnabled = false;
+            Edit.Content = "Edit Job";
         }
     }
 }
