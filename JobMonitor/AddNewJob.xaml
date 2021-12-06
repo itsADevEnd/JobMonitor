@@ -8,11 +8,29 @@
         Title="Add New Job" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid MinWidth="400" MinHeight="440">
         <Label Content="Job Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox x:Name="JobName" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" MinWidth="145" Width="145" Padding="5,5,5,5"/>
+        <TextBox x:Name="JobName" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,31,0,0" MinWidth="145" Width="145" Padding="5,5,5,5">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Label Content="Job Date" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,94,0,0"/>
-        <DatePicker x:Name="JobDate" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,125,0,0" Padding="5,5,5,5"/>
+        <DatePicker x:Name="JobDate" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,125,0,0" Padding="5,5,5,5">
+            <DatePicker.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
         <Label Content="Job Description" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="0,170,0,0"/>
-        <TextBox x:Name="JobDescription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,201,0,0" MinWidth="145" Width="380" Padding="5,5,5,5" Height="143" TextWrapping="Wrap"/>
+        <TextBox x:Name="JobDescription" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,201,0,0" MinWidth="145" Width="380" Padding="5,5,5,5" Height="143" TextWrapping="Wrap">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Label Content="Characters:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="157,64,0,0" Height="28"/>
         <Label Content="{Binding Text.Length, ElementName=JobName, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="225,64,0,0" Height="28"/>
         <Border>
