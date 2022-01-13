@@ -15,7 +15,7 @@ namespace JobMonitor
         private string jobDate = "";
         private string jobDescription = "";
 
-        public int JobId { get; set; }
+        public int JobID { get; set; }
         public string JobName
         {
             get
@@ -68,15 +68,23 @@ namespace JobMonitor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Job(string jobName, string jobDate, string jobDescription)
+        public Job(string jobName, string jobDescription, string jobDate)
         {
-            JobId = id;
+            JobID = id;
             JobName = jobName;
             string[] jobDateSplit = jobDate.Split('/');
             JobDate = new DateTime(int.Parse(jobDateSplit[2]), int.Parse(jobDateSplit[1]), int.Parse(jobDateSplit[0])).ToShortDateString();
-            JobDate = jobDate;
             JobDescription = jobDescription;
+            JobDate = jobDate;
             id++;
+        }
+
+        public Job(int jobID, string jobName, string jobDescription, string jobDate)
+        {
+            JobID = jobID;
+            JobName = jobName;
+            JobDescription = jobDescription;
+            JobDate = jobDate;
         }
     }
 }

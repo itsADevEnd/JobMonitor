@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,14 +25,25 @@ namespace JobMonitor
             InitializeComponent();
         }
 
-        private void AddJob_Click(object sender, RoutedEventArgs e)
+        private async void AddJob_Click(object sender, RoutedEventArgs e)
         {
             if (JobName.Text.Length > 0 && JobName.Text.Length <= 40)
             {
                 if (JobDescription.Text.Length > 0 && JobDescription.Text.Length <= 500)
                 {
-                    MainWindow.Jobs.Add(new Job(JobName.Text, JobDate.Text, JobDescription.Text));
-                    Close();
+                    DateTime jobDate = DateTime.ParseExact(JobDate.Text, "dd/mm/yyyy", CultureInfo.InvariantCulture);
+                    MessageBox.Show(jobDate.ToString());
+
+                    if (await DatabaseConnection.InsertJob(JobName.Text, JobDescription.Text, jobDate) == true)
+                    {
+                        MainWindow.Jobs.Add(new Job(JobName.Text, JobDescription.Text, JobDate.Text));
+                        Close();
+                    }
+                    else
+                    {
+                        MessageBoxResult result = MessageBox.Show("There was a problem trying to add this job in the database. Click 'Yes' to ignore this message and try again, otherwise click 'No' to return to the Job List.", "Unable to Add Job", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.No) Close();
+                    }
                 }
                 else
                 {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -23,18 +24,9 @@ namespace JobMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static int temporaryJobId = -1;
-
-        public static BindingList<Job> Jobs { get; set; } = new BindingList<Job>()
-        {
-            new Job("Make wooden frame", "12/02/2022", "Make a wooden frame for our client."),
-            new Job("Build crafting table", "14/12/2021", "Build a table to be used for crafting.")
-        };
-
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        private static int temporaryJobID = -1;
+        private static int selectedJobID = -1;
+        public static BindingList<Job> Jobs { get; set; } = new BindingList<Job>();
 
         private void AddNewJob_Click(object sender, RoutedEventArgs e)
         {
@@ -52,7 +44,7 @@ namespace JobMonitor
             if ((sender as ListView).SelectedItem is Job selectedJob)
             {
                 Edit.IsEnabled = true;
-                temporaryJobId = selectedJob.JobId;
+                selectedJobID = selectedJob.JobID;
                 JobNameTextBox.Text = selectedJob.JobName;
                 JobDateDatePicker.Text = selectedJob.JobDate;
                 JobDescriptionTextBox.Text = selectedJob.JobDescription;
@@ -86,21 +78,54 @@ namespace JobMonitor
 
         private void UpdateJob()
         {
-            Jobs[temporaryJobId].JobName = JobNameTextBox.Text;
-            Jobs[temporaryJobId].JobDescription = JobDescriptionTextBox.Text;
-            Jobs[temporaryJobId].JobDate = JobDateDatePicker.Text;
+            Jobs[selectedJobID].JobName = JobNameTextBox.Text;
+            Jobs[selectedJobID].JobDescription = JobDescriptionTextBox.Text;
+            Jobs[selectedJobID].JobDate = JobDateDatePicker.Text;
         }
 
         private void CancelChangesButton_Click(object sender, RoutedEventArgs e)
         {
-            JobNameTextBox.Text = Jobs[temporaryJobId].JobName;
-            JobDateDatePicker.Text = Jobs[temporaryJobId].JobDate;
-            JobDescriptionTextBox.Text = Jobs[temporaryJobId].JobDescription;
+            JobNameTextBox.Text = Jobs[selectedJobID].JobName;
+            JobDateDatePicker.Text = Jobs[selectedJobID].JobDate;
+            JobDescriptionTextBox.Text = Jobs[selectedJobID].JobDescription;
             CancelChanges.IsEnabled = false;
             JobNameTextBox.IsEnabled = false;
             JobDateDatePicker.IsEnabled = false;
             JobDescriptionTextBox.IsEnabled = false;
             Edit.Content = "Edit Job";
+        }
+
+        private async void GetJobs()
+        {
+            SqlDataReader reader = await DatabaseConnection.GetJobRecords();
+
+            int tempJobID = -1;
+
+            while (await reader.ReadAsync())
+            {
+                if (tempJobID == -1) tempJobID = reader.GetInt32(0);
+                Job job = new Job(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetValue(3).ToString());
+                Jobs.Add(job);
+            }
+
+            if (tempJobID != -1) temporaryJobID = tempJobID + 1;
+            else temporaryJobID = 0;
+        }
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            try
+            {
+                DatabaseConnection.Connection.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Unable to connect to the database.{Environment.NewLine + Environment.NewLine}Exception: {ex.Message}.{Environment.NewLine + Environment.NewLine}Aborting application.", "Error connecting to database");
+                Application.Current.Shutdown();
+            }
+
+            GetJobs();
         }
     }
 }
