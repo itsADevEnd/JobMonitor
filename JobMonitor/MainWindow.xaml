@@ -15,9 +15,10 @@
         <ListView x:Name="JobListView" Grid.Column="0" Margin="10,68,10,86" ItemsSource="{Binding Jobs}" DataContext="{Binding ElementName=JobMonitorClass}" HorizontalContentAlignment="Center" SelectionChanged="JobListView_SelectionChanged" MaxWidth="520" ScrollViewer.VerticalScrollBarVisibility="Auto" MaxHeight="301.04">
             <ListView.View>
                 <GridView AllowsColumnReorder="True" ColumnHeaderToolTip="Job Information">
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=JobID}" Header="Job ID" Width="200"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=JobName}" Header="Job Name" Width="200"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=JobDescription}" Header="Job Description" Width="200"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding JobDate}" Width="75">
+                    <GridViewColumn DisplayMemberBinding="{Binding JobDate, StringFormat=dd-MM-yyyy}" Width="75">
                         <GridViewColumnHeader>Job Date
                             <GridViewColumnHeader.ContextMenu>
                                 <ContextMenu MenuItem.Click="JobDateSort_Click" Name="JobDateSort">

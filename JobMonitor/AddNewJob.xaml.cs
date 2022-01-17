@@ -31,12 +31,11 @@ namespace JobMonitor
             {
                 if (JobDescription.Text.Length > 0 && JobDescription.Text.Length <= 500)
                 {
-                    DateTime jobDate = DateTime.ParseExact(JobDate.Text, "dd/mm/yyyy", CultureInfo.InvariantCulture);
-                    MessageBox.Show(jobDate.ToString());
+                    DateTime jobDate = DateTime.Parse(JobDate.Text);
 
                     if (await DatabaseConnection.InsertJob(JobName.Text, JobDescription.Text, jobDate) == true)
                     {
-                        MainWindow.Jobs.Add(new Job(JobName.Text, JobDescription.Text, JobDate.Text));
+                        MainWindow.Jobs.Add(new Job(JobName.Text, JobDescription.Text, jobDate));
                         Close();
                     }
                     else

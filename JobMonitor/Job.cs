@@ -10,9 +10,9 @@ namespace JobMonitor
 {
     public class Job : INotifyPropertyChanged
     {
-        private static int id = 0;
+        public static int NextJobID { get; set; }
         private string jobName = "";
-        private string jobDate = "";
+        private DateTime jobDate;
         private string jobDescription = "";
 
         public int JobID { get; set; }
@@ -31,7 +31,7 @@ namespace JobMonitor
                 }
             }
         }
-        public string JobDate
+        public DateTime JobDate
         {
             get
             {
@@ -68,18 +68,17 @@ namespace JobMonitor
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Job(string jobName, string jobDescription, string jobDate)
+        public Job(string jobName, string jobDescription, DateTime jobDate)
         {
-            JobID = id;
+            JobID = NextJobID;
             JobName = jobName;
-            string[] jobDateSplit = jobDate.Split('/');
-            JobDate = new DateTime(int.Parse(jobDateSplit[2]), int.Parse(jobDateSplit[1]), int.Parse(jobDateSplit[0])).ToShortDateString();
+            JobDate = jobDate;
             JobDescription = jobDescription;
             JobDate = jobDate;
-            id++;
+            NextJobID++;
         }
 
-        public Job(int jobID, string jobName, string jobDescription, string jobDate)
+        public Job(int jobID, string jobName, string jobDescription, DateTime jobDate)
         {
             JobID = jobID;
             JobName = jobName;

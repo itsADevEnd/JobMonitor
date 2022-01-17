@@ -24,7 +24,6 @@ namespace JobMonitor
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static int temporaryJobID = -1;
         private static int selectedJobID = -1;
         public static BindingList<Job> Jobs { get; set; } = new BindingList<Job>();
 
@@ -46,7 +45,7 @@ namespace JobMonitor
                 Edit.IsEnabled = true;
                 selectedJobID = selectedJob.JobID;
                 JobNameTextBox.Text = selectedJob.JobName;
-                JobDateDatePicker.Text = selectedJob.JobDate;
+                JobDateDatePicker.Text = selectedJob.JobDate.ToString("yyyy-MM-dd");
                 JobDescriptionTextBox.Text = selectedJob.JobDescription;
             }
             else if (Edit.IsEnabled == true) Edit.IsEnabled = false;
@@ -76,17 +75,27 @@ namespace JobMonitor
             }
         }
 
-        private void UpdateJob()
+        private async void UpdateJob()
         {
-            Jobs[selectedJobID].JobName = JobNameTextBox.Text;
-            Jobs[selectedJobID].JobDescription = JobDescriptionTextBox.Text;
-            Jobs[selectedJobID].JobDate = JobDateDatePicker.Text;
+            DateTime jobDate = DateTime.Parse(JobDateDatePicker.Text);
+
+            if (await DatabaseConnection.UpdateJob(selectedJobID, JobNameTextBox.Text, JobDescriptionTextBox.Text, jobDate))
+            {
+                Jobs[selectedJobID].JobName = JobNameTextBox.Text;
+                Jobs[selectedJobID].JobDescription = JobDescriptionTextBox.Text;
+                Jobs[selectedJobID].JobDate = DateTime.Parse(JobDateDatePicker.Text);
+            }
+            else
+            {
+                MessageBox.Show("Changes could not be saved. Reverting.", "Unable to Save Changes");
+                CancelChangesButton_Click(null, null);
+            }
         }
 
         private void CancelChangesButton_Click(object sender, RoutedEventArgs e)
         {
             JobNameTextBox.Text = Jobs[selectedJobID].JobName;
-            JobDateDatePicker.Text = Jobs[selectedJobID].JobDate;
+            JobDateDatePicker.Text = Jobs[selectedJobID].JobDate.ToString("yyyy-MM-dd");
             JobDescriptionTextBox.Text = Jobs[selectedJobID].JobDescription;
             CancelChanges.IsEnabled = false;
             JobNameTextBox.IsEnabled = false;
@@ -104,17 +113,18 @@ namespace JobMonitor
             while (await reader.ReadAsync())
             {
                 if (tempJobID == -1) tempJobID = reader.GetInt32(0);
-                Job job = new Job(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetValue(3).ToString());
+                Job job = new Job(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), DateTime.Parse(reader.GetValue(3).ToString()));
                 Jobs.Add(job);
             }
 
-            if (tempJobID != -1) temporaryJobID = tempJobID + 1;
-            else temporaryJobID = 0;
+            if (tempJobID != -1) Job.NextJobID = tempJobID + 1;
+            else Job.NextJobID = 0;
         }
 
         public MainWindow()
         {
             InitializeComponent();
+
             try
             {
                 DatabaseConnection.Connection.Open();

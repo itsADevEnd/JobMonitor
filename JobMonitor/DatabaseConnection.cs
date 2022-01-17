@@ -43,9 +43,26 @@ namespace JobMonitor
         public async static Task<bool> InsertJob(string jobName, string jobDescription, DateTime jobDate)
         {
             SqlCommand sqlCommand = new SqlCommand("INSERT INTO Job (JobName, JobDescription, JobDate) " +
-                                                    $"VALUES('{jobName}', '{jobDescription}', {jobDate})", Connection);
+                                                    $"VALUES('{jobName}', '{jobDescription}', '{jobDate.ToString("yyyy-MM-dd")}')", Connection);
             int rowsAffected = await sqlCommand.ExecuteNonQueryAsync();
             
+            if (rowsAffected > 0) return true;
+            else return false;
+        }
+
+        /// <summary>
+        /// Updates an existing job in the database for the "Job" table.
+        /// </summary>
+        /// <param name="jobName">Updated job name.</param>
+        /// <param name="jobDescription">Updated job description.</param>
+        /// <param name="jobDate">Updated job date.</param>
+        /// <returns>Boolean representing whether or not a row was updated in the "Job" table.</returns>
+        public async static Task<bool> UpdateJob(int id, string jobName, string jobDescription, DateTime jobDate)
+        {
+            SqlCommand sqlCommand = new SqlCommand($"UPDATE Job " +
+                                                    $"SET JobName = '{jobName}', JobDescription = '{jobDescription}', JobDate = '{jobDate.ToString("yyyy-MM-dd")}'" +
+                                                    $"WHERE ID = {id}", Connection);
+            int rowsAffected = await sqlCommand.ExecuteNonQueryAsync();
             if (rowsAffected > 0) return true;
             else return false;
         }
