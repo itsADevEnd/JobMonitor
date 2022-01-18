@@ -81,9 +81,18 @@ namespace JobMonitor
 
             if (await DatabaseConnection.UpdateJob(selectedJobID, JobNameTextBox.Text, JobDescriptionTextBox.Text, jobDate))
             {
-                Jobs[selectedJobID].JobName = JobNameTextBox.Text;
-                Jobs[selectedJobID].JobDescription = JobDescriptionTextBox.Text;
-                Jobs[selectedJobID].JobDate = DateTime.Parse(JobDateDatePicker.Text);
+                int jobIndex = Jobs.IndexOf(Jobs.Where(job => job.JobID == selectedJobID).First());
+
+                if (jobIndex == -1)
+                {
+                    MessageBox.Show("Unable to update job.", "Job not Found");
+                }
+                else
+                {
+                    Jobs[jobIndex].JobName = JobNameTextBox.Text;
+                    Jobs[jobIndex].JobDescription = JobDescriptionTextBox.Text;
+                    Jobs[jobIndex].JobDate = DateTime.Parse(JobDateDatePicker.Text);
+                }
             }
             else
             {
@@ -128,14 +137,13 @@ namespace JobMonitor
             try
             {
                 DatabaseConnection.Connection.Open();
+                GetJobs();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Unable to connect to the database.{Environment.NewLine + Environment.NewLine}Exception: {ex.Message}.{Environment.NewLine + Environment.NewLine}Aborting application.", "Error connecting to database");
                 Application.Current.Shutdown();
             }
-
-            GetJobs();
         }
     }
 }

@@ -15,7 +15,7 @@ namespace JobMonitor
         /// <summary>
         /// Stores the connection string to the database and is used when instantiating the "SqlConnection" class which the "Connection" property uses.
         /// </summary>
-        private static readonly string connectionString = @"Data Source=DYLAN-DESKTOP\SQLExpress;Initial Catalog=JobMonitor;User ID=user;Password=321";
+        private static readonly string connectionString = @"Data Source=DYLAN-DESKTOP\SQLExpress;Initial Catalog=JobMonitor;User ID=user;Password=123";
         /// <summary>
         /// Used to connect to and access the database.
         /// </summary>
