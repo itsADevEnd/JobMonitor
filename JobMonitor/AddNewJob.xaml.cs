@@ -29,24 +29,31 @@ namespace JobMonitor
         {
             if (JobName.Text.Length > 0 && JobName.Text.Length <= 40)
             {
-                if (JobDescription.Text.Length > 0 && JobDescription.Text.Length <= 500)
+                if (!string.IsNullOrWhiteSpace(JobDate.Text))
                 {
-                    DateTime jobDate = DateTime.Parse(JobDate.Text);
-
-                    if (await DatabaseConnection.InsertJob(JobName.Text, JobDescription.Text, jobDate) == true)
+                    if (JobDescription.Text.Length > 0 && JobDescription.Text.Length <= 500)
                     {
-                        MainWindow.Jobs.Add(new Job(JobName.Text, JobDescription.Text, jobDate));
-                        Close();
+                        DateTime jobDate = DateTime.Parse(JobDate.Text);
+
+                        if (await DatabaseConnection.InsertJob(JobName.Text, JobDescription.Text, jobDate) == true)
+                        {
+                            MainWindow.Jobs.Add(new Job(JobName.Text, JobDescription.Text, jobDate));
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBoxResult result = MessageBox.Show("There was a problem trying to add this job in the database. Click 'Yes' to ignore this message and try again, otherwise click 'No' to return to the Job List.", "Unable to Add Job", MessageBoxButton.YesNo);
+                            if (result == MessageBoxResult.No) Close();
+                        }
                     }
                     else
                     {
-                        MessageBoxResult result = MessageBox.Show("There was a problem trying to add this job in the database. Click 'Yes' to ignore this message and try again, otherwise click 'No' to return to the Job List.", "Unable to Add Job", MessageBoxButton.YesNo);
-                        if (result == MessageBoxResult.No) Close();
+                        MessageBox.Show("The job description is either empty or is greater than 500 characters.", "Warning");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("The job description is either empty or is greater than 500 characters.", "Warning");
+                    MessageBox.Show("You must have a date for the job.", "Date Cannot be Empty");
                 }
             }
             else

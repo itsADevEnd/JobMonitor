@@ -45,8 +45,13 @@ namespace JobMonitor
             SqlCommand sqlCommand = new SqlCommand("INSERT INTO Job (JobName, JobDescription, JobDate) " +
                                                     $"VALUES('{jobName}', '{jobDescription}', '{jobDate.ToString("yyyy-MM-dd")}')", Connection);
             int rowsAffected = await sqlCommand.ExecuteNonQueryAsync();
-            
-            if (rowsAffected > 0) return true;
+
+            if (rowsAffected > 0)
+            {
+                decimal tempId = (decimal)await new SqlCommand("SELECT SCOPE_IDENTITY()", Connection).ExecuteScalarAsync();
+                Job.NextJobID = (int)tempId;
+                return true;
+            }
             else return false;
         }
 
